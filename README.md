@@ -1,4 +1,4 @@
-# dollar-pkr
+# Dollar-PKR
 ```
 Extension to Gnome-Shell in versions (36,38,40,41), for conversion dollar USD in Rs PKR.
 
