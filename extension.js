@@ -60,7 +60,10 @@ function disable(){
         panelButton.destroy();
         panelButton = null;
     }
-
+    if (_httpSession) {
+        _httpSession.abort();
+        _httpSession = null;
+    }
     if (sourceId) {
         GLib.Source.remove(sourceId);
         sourceId = null;
