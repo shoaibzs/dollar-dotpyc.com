@@ -28,7 +28,7 @@ const PanelMenu = imports.ui.panelMenu;
 let panelButton;
 let panelButtonText;
 let _httpSession;
-let _dollarQuatation;
+let _dollarQuotation;
 let sourceId = null;
 
 // Start application
@@ -60,10 +60,7 @@ function disable(){
         panelButton.destroy();
         panelButton = null;
     }
-    if (_httpSession) {
-        _httpSession.abort();
-        _httpSession = null;
-    }
+
     if (sourceId) {
         GLib.Source.remove(sourceId);
         sourceId = null;
@@ -81,14 +78,14 @@ function load_json_async(){
 
     let message = Soup.form_request_new_from_hash(
         'GET', 
-        "http://economia.awesomeapi.com.br/json/last/USD-PKR", 
+        "https://economia.awesomeapi.com.br/last/USD-PKR", 
         {});
     
     _httpSession.queue_message(message, () => {
         try {
             if (!message.response_body.data) {
                 panelButtonText = new St.Label({
-                    text : "Not content body",
+                    text : "(1 USD = " + _dollarQuotation + " PKR)",
                     y_align: Clutter.ActorAlign.CENTER,
                 });
                 panelButton.set_child(panelButtonText);
@@ -97,12 +94,12 @@ function load_json_async(){
             }
 
             let jp = JSON.parse(message.response_body.data);
-            _dollarQuatation = jp["USDPKR"]["bid"];
-            _dollarQuatation = _dollarQuatation.split(".");
-            _dollarQuatation = _dollarQuatation[0] + "." + _dollarQuatation[1].substring(0,2);
+            _dollarQuotation = jp["USD"]["bid"];
+            _dollarQuotation = _dollarQuotation.split(".");
+            _dollarQuotation = _dollarQuotation[0] + "," + _dollarQuotation[1].substring(0,2);
    
             panelButtonText = new St.Label({
-                text : "[USD: 1.00 = PKR: " + _dollarQuatation + "]",
+                text : "(1 USD = " + _dollarQuotation + " PKR)",
                 y_align: Clutter.ActorAlign.CENTER,
             });
 
@@ -112,7 +109,7 @@ function load_json_async(){
 
         } catch (e) {
             panelButtonText = new St.Label({
-                text : "Request error",
+                text : "(1 USD = " + _dollarQuotation + " PKR)",
                 y_align: Clutter.ActorAlign.CENTER,
             });
 
