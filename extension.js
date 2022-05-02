@@ -59,8 +59,7 @@ function disable(){
     if (panelButton) {
         panelButton.destroy();
         panelButton = null;
-    }
-
+    }   
     if (sourceId) {
         GLib.Source.remove(sourceId);
         sourceId = null;
@@ -94,7 +93,7 @@ function load_json_async(){
             }
 
             let jp = JSON.parse(message.response_body.data);
-            _dollarQuotation = jp["USD"]["bid"];
+            _dollarQuotation = jp["USDPKR"]["bid"];
             _dollarQuotation = _dollarQuotation.split(".");
             _dollarQuotation = _dollarQuotation[0] + "," + _dollarQuotation[1].substring(0,2);
    
