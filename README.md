@@ -20,9 +20,13 @@ SPDX-License-Identifier: GPL-2.0-or-later
 ```
 Install from gnome extensions website:
 https://extensions.gnome.org/extension/4869/dollar-pkr/
-or
+
+#or
+
 cd /tmp && git clone https://github.com/shoaibzs/dollar-pkr.git && mv dollar-pkr dollar-pkr@shoaibzs.github.com && cp -av dollar-pkr@shoaibzs.github.com ~/.local/share/gnome-shell/extensions/ && gnome-shell-extension-tool --enable-extension dollar-pkr@shoaibzs.github.com && rm -rf dollar-pkr@shoaibzs.github.com .
-Or
+
+#Or
+
 just download dollar-pkr@shoaibzs.github.com.zip form releases and unzip dollar-pkr@shoaibzs.github.com to ~/.local/share/gnome-shell/extensions/ .
 
 ```
