@@ -64,6 +64,10 @@ function disable(){
         GLib.Source.remove(sourceId);
         sourceId = null;
     }
+    if (_httpSession) {
+        _httpSession.abort(_httpSession);
+        _httpSession = undefined;
+    }
 }
 
 // Requests API Dollar
@@ -98,7 +102,8 @@ function load_json_async(){
             _dollarQuotation = _dollarQuotation[0] + "," + _dollarQuotation[1].substring(0,2);
    
             panelButtonText = new St.Label({
-                text : "(1 USD = " + _dollarQuotation + " PKR)",
+            style_class : "cPanelText",
+                text : "(1 USD = " +  _dollarQuotation + " PKR)",
                 y_align: Clutter.ActorAlign.CENTER,
             });
 
